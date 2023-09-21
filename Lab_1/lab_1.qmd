@@ -148,3 +148,55 @@ Create a file in your working directory called "mytest.R" using the file.create(
 file.create("mytest.R")
 ```
 
+This should be the only file in this newly created directory. Let's check this by listing all the files in the current directory.
+```{r}
+list.files()
+```
+
+Check to see if "mytest.R" exists in the working directory using the file.exists() function.
+```{r}
+file.exists("mytest.R")
+```
+
+Access information about the file "mytest.R" by using file.info().
+```{r}
+file.info("mytest.R")
+```
+
+Change the name of the file "mytest.R" to "mytest2.R" by using file.rename().
+```{r}
+file.rename("mytest.R", "mytest2.R")
+```
+
+Make a copy of "mytest2.R" called "mytest3.R" using file.copy().
+```{r}
+file.copy("mytest2.R", "mytest3.R")
+```
+
+Provide the relative path to the file "mytest3.R" by using file.path().
+```{r}
+file.path("mytest3.R")
+```
+
+You can use file.path to construct file and directory paths that are independent of the operating system your R code is running on. Pass 'folder1' and 'folder2' as arguments to file.path to make a platform-independent pathname.
+```{r}
+file.path("folder1", "folder2")
+```
+
+Take a look at the documentation for dir.create by entering ?dir.create . Notice the 'recursive' argument. In order to create nested directories, 'recursive' must be set to TRUE.
+```{r}
+?dir.create
+```
+
+Create a directory in the current working directory called "testdir2" and a subdirectory for it called "testdir3", all in one command by using dir.create() and file.path().
+```{r}
+dir.create(file.path('testdir2', 'testdir3'), recursive = TRUE)
+```
+
+Go back to your original working directory using setwd(). (Recall that we created the variable old.dir with the full path for the orginal working directory at the start of these questions.)
+```{r}
+setwd(old.dir)
+```
+
+3: Sequences of Numbers
+
