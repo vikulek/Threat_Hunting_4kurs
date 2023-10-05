@@ -1,9 +1,10 @@
 ---
 title: "lab_1"
+author: vika
 format: 
-  md:
-    output: github_document
-editor: visual
+    md:
+        output-file: README.MD
+engine: knitr
 ---
 
 
