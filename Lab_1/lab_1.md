@@ -196,7 +196,8 @@ dir().
 dir()
 ```
 
-    [1] "lab_1.qmd"       "lab_1.rmarkdown"
+    [1] "lab_1.md"        "lab_1.qmd"       "lab_1.rmarkdown" "mytest2.R"      
+    [5] "mytest3.R"       "testdir"         "testdir2"       
 
 As we go through this lesson, you should be examining the help page for
 each new function. Check out the help page for list.files with the
@@ -231,6 +232,8 @@ called “testdir”.
 dir.create("testdir")
 ```
 
+    Warning in dir.create("testdir"): 'testdir' уже существует
+
 Set your working directory to “testdir” with the setwd() command.
 
 ``` r
@@ -253,7 +256,8 @@ check this by listing all the files in the current directory.
 list.files()
 ```
 
-    [1] "lab_1.qmd"       "lab_1.rmarkdown" "mytest.R"        "testdir"        
+    [1] "lab_1.md"        "lab_1.qmd"       "lab_1.rmarkdown" "mytest.R"       
+    [5] "mytest2.R"       "mytest3.R"       "testdir"         "testdir2"       
 
 Check to see if “mytest.R” exists in the working directory using the
 file.exists() function.
@@ -271,9 +275,9 @@ file.info("mytest.R")
 ```
 
              size isdir mode               mtime               ctime
-    mytest.R    0 FALSE  666 2023-10-05 09:58:33 2023-10-05 09:58:33
+    mytest.R    0 FALSE  666 2023-10-05 10:13:38 2023-10-05 10:13:38
                            atime exe
-    mytest.R 2023-10-05 09:58:33  no
+    mytest.R 2023-10-05 10:13:38  no
 
 Change the name of the file “mytest.R” to “mytest2.R” by using
 file.rename().
@@ -290,7 +294,7 @@ Make a copy of “mytest2.R” called “mytest3.R” using file.copy().
 file.copy("mytest2.R", "mytest3.R")
 ```
 
-    [1] TRUE
+    [1] FALSE
 
 Provide the relative path to the file “mytest3.R” by using file.path().
 
@@ -326,6 +330,9 @@ dir.create() and file.path().
 ``` r
 dir.create(file.path('testdir2', 'testdir3'), recursive = TRUE)
 ```
+
+    Warning in dir.create(file.path("testdir2", "testdir3"), recursive = TRUE):
+    'testdir2\testdir3' уже существует
 
 Go back to your original working directory using setwd(). (Recall that
 we created the variable old.dir with the full path for the orginal
