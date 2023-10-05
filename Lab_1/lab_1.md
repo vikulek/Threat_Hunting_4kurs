@@ -275,9 +275,9 @@ file.info("mytest.R")
 ```
 
              size isdir mode               mtime               ctime
-    mytest.R    0 FALSE  666 2023-10-05 10:13:38 2023-10-05 10:13:38
+    mytest.R    0 FALSE  666 2023-10-05 10:16:23 2023-10-05 10:16:23
                            atime exe
-    mytest.R 2023-10-05 10:13:38  no
+    mytest.R 2023-10-05 10:16:23  no
 
 Change the name of the file “mytest.R” to “mytest2.R” by using
 file.rename().
