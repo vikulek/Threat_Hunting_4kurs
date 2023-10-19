@@ -1,14 +1,7 @@
-# Введение в R
-Турбина Виктория
+# lab_1
+vika
 
-## Цель работы
-
-Используя программный пакет swirl, освоить базовые операции в языке
-программирования R.
-
-## Ход работы
-
-### 1. Основные блоки
+1: Basic Building Blocks
 
 In its simplest form, R can be used as an interactive calculator. Type
 5 + 7 and press Enter
@@ -162,7 +155,7 @@ my_div
 
     [1] 3.478505 3.181981 2.146460
 
-### 2. Рабочая область и файлы
+2: Workspace and Files
 
 Determine which directory your R session is using as its current working
 directory using getwd().
@@ -171,7 +164,7 @@ directory using getwd().
 getwd()
 ```
 
-    [1] "C:/Users/Asus/Desktop/Универ/Threat_Hunting/4 курс/lab_1/Lab_1"
+    [1] "C:/Users/Asus/Desktop/Универ/Захарчук/4 курс/lab_1/Lab_1"
 
 List all the objects in your local workspace using ls()
 
@@ -204,8 +197,8 @@ dir().
 dir()
 ```
 
-    [1] "lab_1.qmd"       "lab_1.rmarkdown" "mytest2.R"       "mytest3.R"      
-    [5] "README.md"       "README.MD.md"    "testdir"         "testdir2"       
+    [1] "lab_1.md"        "lab_1.qmd"       "lab_1.rmarkdown" "mytest2.R"      
+    [5] "mytest3.R"       "testdir"         "testdir2"       
 
 As we go through this lesson, you should be examining the help page for
 each new function. Check out the help page for list.files with the
@@ -264,9 +257,8 @@ check this by listing all the files in the current directory.
 list.files()
 ```
 
-    [1] "lab_1.qmd"       "lab_1.rmarkdown" "mytest.R"        "mytest2.R"      
-    [5] "mytest3.R"       "README.md"       "README.MD.md"    "testdir"        
-    [9] "testdir2"       
+    [1] "lab_1.md"        "lab_1.qmd"       "lab_1.rmarkdown" "mytest.R"       
+    [5] "mytest2.R"       "mytest3.R"       "testdir"         "testdir2"       
 
 Check to see if “mytest.R” exists in the working directory using the
 file.exists() function.
@@ -284,9 +276,9 @@ file.info("mytest.R")
 ```
 
              size isdir mode               mtime               ctime
-    mytest.R    0 FALSE  666 2023-10-07 21:48:38 2023-10-07 21:48:38
+    mytest.R    0 FALSE  666 2023-10-05 10:22:17 2023-10-05 10:22:17
                            atime exe
-    mytest.R 2023-10-07 21:48:38  no
+    mytest.R 2023-10-05 10:22:17  no
 
 Change the name of the file “mytest.R” to “mytest2.R” by using
 file.rename().
@@ -351,7 +343,7 @@ working directory at the start of these questions.)
 setwd(old.dir)
 ```
 
-### 3. Последовательности чисел
+3: Sequences of Numbers
 
 The simplest way to create a sequence of numbers in R is by using the
 `:` operator. Type 1:20 to see how it works.
@@ -498,7 +490,7 @@ rep(c(0, 1, 2), each = 10)
 
      [1] 0 0 0 0 0 0 0 0 0 0 1 1 1 1 1 1 1 1 1 1 2 2 2 2 2 2 2 2 2 2
 
-### 4. Векторы
+4: Vectors
 
 First, create a numeric vector num_vect that contains the values 0.5,
 55, -10, and 6.
@@ -618,8 +610,3 @@ paste(LETTERS, 1:4, sep = "-")
      [1] "A-1" "B-2" "C-3" "D-4" "E-1" "F-2" "G-3" "H-4" "I-1" "J-2" "K-3" "L-4"
     [13] "M-1" "N-2" "O-3" "P-4" "Q-1" "R-2" "S-3" "T-4" "U-1" "V-2" "W-3" "X-4"
     [25] "Y-1" "Z-2"
-
-## Вывод
-
-Таким образом, используя программный пакет swirl, удалось освоить
-базовые операции в языке программирования R.
