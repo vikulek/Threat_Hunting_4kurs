@@ -83,3 +83,6 @@ starwars %>% group_by(eye_color) %>% summarize(total = n()) %>% arrange(desc(tot
 starwars %>% group_by(species) %>%  summarize(средний = mean(nchar(name)))
 ```
 
+## Вывод
+
+Таким образом, используя программный пакет dplyr, удалось развить практические навыки использования языка программирования R для обработки данных.
