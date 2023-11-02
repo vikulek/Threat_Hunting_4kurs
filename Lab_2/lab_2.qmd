@@ -19,6 +19,7 @@ select(), filter(), mutate(), arrange(), group_by()
 1. Сколько строк в датафрейме?
 
 ```{r}
+library('dplyr')
 starwars %>% nrow()
 ```
 
