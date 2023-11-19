@@ -27,7 +27,19 @@ engine: knitr
 1. Импортируйте данные.
 
 ```{r}
+library(dplyr)
+dataset <- read.csv("C:/Users/Asus/Downloads/Telegram Desktop/mir.csv-01/mir.csv-01.csv")
+dataset
+```
 
+```{r}
+dataset_1 <- read.csv(file="C:/Users/Asus/Downloads/Telegram Desktop/mir.csv-01/mir.csv-01.csv",nrows=167)
+dataset_1
+```
+
+```{r}
+dataset_2 <- read.csv(file="C:/Users/Asus/Downloads/Telegram Desktop/mir.csv-01/mir.csv-01.csv",skip=169)
+dataset_2
 ```
 
 2. Привести датасеты в вид “аккуратных данных”, преобразовать типы столбцов в соответствии с типом данных
@@ -35,7 +47,11 @@ engine: knitr
 3. Просмотрите общую структуру данных с помощью функции glimpse()
 
 ```{r}
+dataset_1 %>% glimpse()
+```
 
+```{r}
+dataset_2 %>% glimpse()
 ```
 
 ### Анализ
@@ -58,7 +74,7 @@ engine: knitr
 WPA3, и названия точек доступа, реализованных на этих устройствах
 
 ```{r}
-
+dataset_1 %>% filter(Privacy == " WPA3 WPA2")
 ```
 
 4. Отсортировать точки доступа по интервалу времени, в течение которого они
