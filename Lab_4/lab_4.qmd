@@ -41,7 +41,7 @@ names(dns) <- c("ts","uid","id.orig_h","id.orig_p","id.resp_h","id.resp_p","prot
 3. Преобразуйте данные в столбцах в нужный формат
 
 ```{r}
-
+transform(dns, ts = as.ts(ts))
 ```
 
 
@@ -84,7 +84,8 @@ dns %>% select(id.orig_h) %>% group_by(id.orig_h) %>% summarize(total = n()) %>%
 обращений.
 
 ```{r}
-dns %>% select(query, qtype_name) %>% filter(qtype_name == "A"|qtype_name == "AA"| qtype_name == "AAA" | qtype_name == "AAAA") %>% group_by(query) %>% summarize(total = n()) %>% arrange(desc(total)) %>% head(10)
+my_top_10 <- dns %>% select(query, qtype_name) %>% filter(qtype_name == "A"|qtype_name == "AA"| qtype_name == "AAA" | qtype_name == "AAAA") %>% group_by(query) %>% summarize(total = n()) %>% arrange(desc(total)) %>% head(10)
+my_top_10
 ```
 
 
@@ -94,7 +95,7 @@ dns %>% select(query, qtype_name) %>% filter(qtype_name == "A"|qtype_name == "AA
 топ-10 доменам.
 
 ```{r}
-
+summary(diff((dns %>% filter(tolower(query) %in% my_top_10$query) %>% arrange(ts))$ts))
 ```
 
 
@@ -107,7 +108,9 @@ dns %>% select(query, qtype_name) %>% filter(qtype_name == "A"|qtype_name == "AA
 такие IP адреса в исследуемом датасете?
 
 ```{r}
-
+t <- dns %>% group_by(id.orig_h, query) %>% summarise(total = n()) %>% filter(total > 1)
+unique(t$id.orig_h)
+unique(t$id.orig_h)%>% head()
 ```
 
 
@@ -137,3 +140,8 @@ dns %>% select(query, qtype_name) %>% filter(qtype_name == "A"|qtype_name == "AA
 - api.twitter.com : США, Сан-Франциско, Twitter Inc.
 
 - api.facebook.com : США, Менло-Парк, Facebook, Inc.
+
+## Вывод
+
+Используя программный пакет dplyr, был освоен анализ
+DNS логов с помощью языка программирования R.
