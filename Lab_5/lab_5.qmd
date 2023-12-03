@@ -58,7 +58,7 @@ dataset_2 %>% glimpse()
 1. Определить небезопасные точки доступа (без шифрования – OPN)
 
 ```{r}
-
+dataset_1 %>% filter(Privacy == ' OPN')
 ```
 
 2. Определить производителя для каждого обнаруженного устройства
@@ -78,20 +78,22 @@ dataset_1 %>% filter(Privacy == " WPA3 WPA2")
 находились на связи, по убыванию.
 
 ```{r}
-
+a <- difftime(dataset_1$Last.time.seen, dataset_1$First.time.seen, units = "secs")
+time_1 <- dataset_1
+time_1 <- cbind(time_1,a)
+time_1 %>% select(BSSID,ESSID, a) %>% arrange(desc(a))
 ```
 
 5. Обнаружить топ-10 самых быстрых точек доступа.
 
 ```{r}
-
+dataset_1 %>% select(BSSID,ESSID,Speed) %>% arrange(desc(Speed)) %>% head(10)
 ```
 
-6. Отсортировать точки доступа по частоте отправки запросов (beacons) в единицу
-времени по их убыванию.
+6. Отсортировать точки доступа по частоте отправки запросов (beacons) в единицу времени по их убыванию.
 
 ```{r}
-
+dataset_1 %>% select(BSSID,ESSID,X..beacons) %>% arrange(desc(X..beacons))
 ```
 
 #### Данные клиентов
@@ -105,7 +107,7 @@ dataset_1 %>% filter(Privacy == " WPA3 WPA2")
 2. Обнаружить устройства, которые НЕ рандомизируют свой MAC адрес
 
 ```{r}
-
+dataset_2 %>% select(Station.MAC) %>% filter(!Station.MAC %in% grep(":",dataset_2$Station.MAC, value = TRUE))
 ```
 
 3. Кластеризовать запросы от устройств к точкам доступа по их именам. Определить время появления устройства в зоне радиовидимости и время выхода его из нее.
