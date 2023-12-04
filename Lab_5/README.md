@@ -230,7 +230,17 @@ dataset_1 %>% filter(Privacy == ' OPN')
 
 1.  Определить производителя для каждого обнаруженного устройства
 
-<!-- -->
+-   E8:28:C1 Eltex Enterprise Ltd.
+
+-   00:25:00 Apple, Inc.
+
+-   E0:D9:E3 Eltex Enterprise Ltd.
+
+-   00:26:99 Cisco Systems, Inc
+
+-   00:03:7A Taiyo Yuden Co., Ltd.
+
+-   00:03:7F Atheros Communications, Inc.
 
 1.  Выявить устройства, использующие последнюю версию протокола
     шифрования WPA3, и названия точек доступа, реализованных на этих
@@ -645,7 +655,39 @@ dataset_1 %>% select(BSSID,ESSID,X..beacons) %>% arrange(desc(X..beacons))
 
 1.  Определить производителя для каждого обнаруженного устройства
 
-<!-- -->
+``` r
+dataset_2 %>% glimpse()
+```
+
+    Rows: 12,269
+    Columns: 7
+    $ Station.MAC     <chr> "CA:66:3B:8F:56:DD", "96:35:2D:3D:85:E6", "5C:3A:45:9E…
+    $ First.time.seen <chr> " 2023-07-28 09:13:03", " 2023-07-28 09:13:03", " 2023…
+    $ Last.time.seen  <chr> " 2023-07-28 10:59:44", " 2023-07-28 09:13:03", " 2023…
+    $ Power           <chr> " -33", " -65", " -39", " -61", " -53", " -43", " -31"…
+    $ X..packets      <chr> "      858", "        4", "      432", "      958", " …
+    $ BSSID           <chr> " BE:F1:71:D5:17:8B", " (not associated) ", " BE:F1:71…
+    $ Probed.ESSIDs   <chr> "C322U13 3965", "IT2 Wireless", "C322U21 0566", "C322U…
+
+-   E8:28:C1 Eltex Enterprise Ltd.
+
+-   00:25:00 Apple, Inc.
+
+-   00:26:99 Cisco Systems, Inc
+
+-   0C:80:63 TP-LINK TECHNOLOGIES CO.,LTD.
+
+-   08:3A:2F Guangzhou Juan Intelligent Tech Joint Stock Co.,Ltd
+
+-   00:23:EB Cisco Systems, Inc
+
+-   E0:D9:E3 Eltex Enterprise Ltd.
+
+-   DC:09:4C HUAWEI TECHNOLOGIES CO.,LTD
+
+-   00:03:7F Atheros Communications, Inc.
+
+-   00:0D:97 Hitachi Energy USA Inc.
 
 1.  Обнаружить устройства, которые НЕ рандомизируют свой MAC адрес
 
@@ -847,7 +889,24 @@ dataset_2 %>% select(Station.MAC) %>% filter(!Station.MAC %in% grep(":",dataset_
     Определить время появления устройства в зоне радиовидимости и время
     выхода его из нее.
 
-<!-- -->
+``` r
+dataset_2 %>% filter(!is.na(Probed.ESSIDs)) %>% group_by(Probed.ESSIDs) %>%  summarise("first" = min(First.time.seen), "last" = max(Last.time.seen),)
+```
+
+    # A tibble: 108 × 3
+       Probed.ESSIDs                  first                  last                  
+       <chr>                          <chr>                  <chr>                 
+     1 ""                             ""                     "Шк"                  
+     2 "-D-13-"                       " 2023-07-28 09:14:42" " 2023-07-28 10:26:42"
+     3 "1"                            " 2023-07-28 10:36:12" " 2023-07-28 11:56:13"
+     4 "107"                          " 2023-07-28 10:29:43" " 2023-07-28 10:29:43"
+     5 "531"                          " 2023-07-28 10:57:04" " 2023-07-28 10:57:04"
+     6 "AAAAAOB/CC0ADwGkRedmi 3S"     " 2023-07-28 09:34:20" " 2023-07-28 11:44:40"
+     7 "AKADO-D967"                   " 2023-07-28 10:31:55" " 2023-07-28 10:31:55"
+     8 "AQAAAB6zaIoATwEURedmi Note 5" " 2023-07-28 10:25:19" " 2023-07-28 11:51:48"
+     9 "ASUS"                         " 2023-07-28 10:31:13" " 2023-07-28 10:31:13"
+    10 "Alex-net2"                    " 2023-07-28 10:01:06" " 2023-07-28 10:01:06"
+    # ℹ 98 more rows
 
 1.  Оценить стабильность уровня сигнала внури кластера во времени.
     Выявить наиболее стабильный кластер.
