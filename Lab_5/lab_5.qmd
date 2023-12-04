@@ -63,9 +63,17 @@ dataset_1 %>% filter(Privacy == ' OPN')
 
 2. Определить производителя для каждого обнаруженного устройства
 
-```{r}
+- E8:28:C1 Eltex Enterprise Ltd.
 
-```
+- 00:25:00 Apple, Inc.
+
+- E0:D9:E3 Eltex Enterprise Ltd.
+
+- 00:26:99 Cisco Systems, Inc
+
+- 00:03:7A Taiyo Yuden Co., Ltd.
+
+- 00:03:7F Atheros Communications, Inc.
 
 3. Выявить устройства, использующие последнюю версию протокола шифрования
 WPA3, и названия точек доступа, реализованных на этих устройствах
@@ -101,8 +109,28 @@ dataset_1 %>% select(BSSID,ESSID,X..beacons) %>% arrange(desc(X..beacons))
 1. Определить производителя для каждого обнаруженного устройства
 
 ```{r}
-
+dataset_2 %>% glimpse()
 ```
+
+- E8:28:C1 Eltex Enterprise Ltd.
+
+- 00:25:00 Apple, Inc.
+
+- 00:26:99 Cisco Systems, Inc
+
+- 0C:80:63 TP-LINK TECHNOLOGIES CO.,LTD.
+
+- 08:3A:2F Guangzhou Juan Intelligent Tech Joint Stock Co.,Ltd
+
+- 00:23:EB Cisco Systems, Inc
+
+- E0:D9:E3 Eltex Enterprise Ltd.
+
+- DC:09:4C HUAWEI TECHNOLOGIES CO.,LTD
+
+- 00:03:7F Atheros Communications, Inc.
+
+- 00:0D:97 Hitachi Energy USA Inc.
 
 2. Обнаружить устройства, которые НЕ рандомизируют свой MAC адрес
 
@@ -113,7 +141,7 @@ dataset_2 %>% select(Station.MAC) %>% filter(!Station.MAC %in% grep(":",dataset_
 3. Кластеризовать запросы от устройств к точкам доступа по их именам. Определить время появления устройства в зоне радиовидимости и время выхода его из нее.
 
 ```{r}
-
+dataset_2 %>% filter(!is.na(Probed.ESSIDs)) %>% group_by(Probed.ESSIDs) %>%  summarise("first" = min(First.time.seen), "last" = max(Last.time.seen),)
 ```
 
 4. Оценить стабильность уровня сигнала внури кластера во времени. Выявить наиболее стабильный кластер.
