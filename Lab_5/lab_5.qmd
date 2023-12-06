@@ -41,6 +41,11 @@ dataset_2 <- read.csv(file="C:/Users/Asus/Downloads/Telegram Desktop/mir.csv-01/
 
 2. Привести датасеты в вид “аккуратных данных”, преобразовать типы столбцов в соответствии с типом данных
 
+```{r}
+dataset_2 <- dataset_2 %>% mutate_at(vars(Station.MAC, BSSID, Probed.ESSIDs), trimws) %>% mutate_at(vars(Station.MAC, BSSID, Probed.ESSIDs), na_if, "")
+```
+
+
 3. Просмотрите общую структуру данных с помощью функции glimpse()
 
 ```{r}
@@ -141,13 +146,13 @@ dataset_2 %>% select(Station.MAC) %>% filter(!Station.MAC %in% grep(":",dataset_
 3. Кластеризовать запросы от устройств к точкам доступа по их именам. Определить время появления устройства в зоне радиовидимости и время выхода его из нее.
 
 ```{r}
-dataset_2 %>% filter(!is.na(Probed.ESSIDs)) %>% group_by(Probed.ESSIDs) %>%  summarise("first" = min(First.time.seen), "last" = max(Last.time.seen),)
+dataset_2 %>% filter(!is.na(Probed.ESSIDs)) %>% group_by(Station.MAC, Probed.ESSIDs) %>%  summarise("first" = min(First.time.seen), "last" = max(Last.time.seen), Power)
 ```
 
 4. Оценить стабильность уровня сигнала внури кластера во времени. Выявить наиболее стабильный кластер.
 
 ```{r}
-
+dataset_2 %>% filter(!is.na(Probed.ESSIDs),!is.na(Power) ) %>% group_by(Station.MAC) %>%  summarise("first" = min(First.time.seen), "last" = max(Last.time.seen), Power) %>% arrange(desc(Power)) %>% head(1)
 ```
 
 ## Вывод

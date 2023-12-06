@@ -50,7 +50,11 @@ dataset_2 <- read.csv(file="C:/Users/Asus/Downloads/Telegram Desktop/mir.csv-01/
 1.  Привести датасеты в вид “аккуратных данных”, преобразовать типы
     столбцов в соответствии с типом данных
 
-2.  Просмотрите общую структуру данных с помощью функции glimpse()
+``` r
+dataset_2 <- dataset_2 %>% mutate_at(vars(Station.MAC, BSSID, Probed.ESSIDs), trimws) %>% mutate_at(vars(Station.MAC, BSSID, Probed.ESSIDs), na_if, "")
+```
+
+1.  Просмотрите общую структуру данных с помощью функции glimpse()
 
 ``` r
 dataset_1 %>% glimpse()
@@ -85,7 +89,7 @@ dataset_2 %>% glimpse()
     $ Last.time.seen  <chr> " 2023-07-28 10:59:44", " 2023-07-28 09:13:03", " 2023…
     $ Power           <chr> " -33", " -65", " -39", " -61", " -53", " -43", " -31"…
     $ X..packets      <chr> "      858", "        4", "      432", "      958", " …
-    $ BSSID           <chr> " BE:F1:71:D5:17:8B", " (not associated) ", " BE:F1:71…
+    $ BSSID           <chr> "BE:F1:71:D5:17:8B", "(not associated)", "BE:F1:71:D6:…
     $ Probed.ESSIDs   <chr> "C322U13 3965", "IT2 Wireless", "C322U21 0566", "C322U…
 
 ### Анализ
@@ -666,7 +670,7 @@ dataset_2 %>% glimpse()
     $ Last.time.seen  <chr> " 2023-07-28 10:59:44", " 2023-07-28 09:13:03", " 2023…
     $ Power           <chr> " -33", " -65", " -39", " -61", " -53", " -43", " -31"…
     $ X..packets      <chr> "      858", "        4", "      432", "      958", " …
-    $ BSSID           <chr> " BE:F1:71:D5:17:8B", " (not associated) ", " BE:F1:71…
+    $ BSSID           <chr> "BE:F1:71:D5:17:8B", "(not associated)", "BE:F1:71:D6:…
     $ Probed.ESSIDs   <chr> "C322U13 3965", "IT2 Wireless", "C322U21 0566", "C322U…
 
 -   E8:28:C1 Eltex Enterprise Ltd.
@@ -890,26 +894,39 @@ dataset_2 %>% select(Station.MAC) %>% filter(!Station.MAC %in% grep(":",dataset_
     выхода его из нее.
 
 ``` r
-dataset_2 %>% filter(!is.na(Probed.ESSIDs)) %>% group_by(Probed.ESSIDs) %>%  summarise("first" = min(First.time.seen), "last" = max(Last.time.seen),)
+dataset_2 %>% filter(!is.na(Probed.ESSIDs)) %>% group_by(Station.MAC, Probed.ESSIDs) %>%  summarise("first" = min(First.time.seen), "last" = max(Last.time.seen), Power)
 ```
 
-    # A tibble: 108 × 3
-       Probed.ESSIDs                  first                  last                  
-       <chr>                          <chr>                  <chr>                 
-     1 ""                             ""                     "Шк"                  
-     2 "-D-13-"                       " 2023-07-28 09:14:42" " 2023-07-28 10:26:42"
-     3 "1"                            " 2023-07-28 10:36:12" " 2023-07-28 11:56:13"
-     4 "107"                          " 2023-07-28 10:29:43" " 2023-07-28 10:29:43"
-     5 "531"                          " 2023-07-28 10:57:04" " 2023-07-28 10:57:04"
-     6 "AAAAAOB/CC0ADwGkRedmi 3S"     " 2023-07-28 09:34:20" " 2023-07-28 11:44:40"
-     7 "AKADO-D967"                   " 2023-07-28 10:31:55" " 2023-07-28 10:31:55"
-     8 "AQAAAB6zaIoATwEURedmi Note 5" " 2023-07-28 10:25:19" " 2023-07-28 11:51:48"
-     9 "ASUS"                         " 2023-07-28 10:31:13" " 2023-07-28 10:31:13"
-    10 "Alex-net2"                    " 2023-07-28 10:01:06" " 2023-07-28 10:01:06"
-    # ℹ 98 more rows
+    `summarise()` has grouped output by 'Station.MAC'. You can override using the
+    `.groups` argument.
+
+    # A tibble: 1,477 × 5
+    # Groups:   Station.MAC [1,477]
+       Station.MAC       Probed.ESSIDs                    first          last  Power
+       <chr>             <chr>                            <chr>          <chr> <chr>
+     1 00:90:4C:E6:54:54 Redmi                            " 2023-07-28 … " 20… " -6…
+     2 00:95:69:E7:7C:ED nvripcsuite                      " 2023-07-28 … " 20… " -5…
+     3 00:95:69:E7:7D:21 nvripcsuite                      " 2023-07-28 … " 20… " -3…
+     4 00:95:69:E7:7F:35 nvripcsuite                      " 2023-07-28 … " 20… " -6…
+     5 00:F4:8D:F7:C5:19 Redmi 12                         " 2023-07-28 … " 20… " -7…
+     6 02:00:00:00:00:00 xt3 w64dtgv5cfrxhttps://vk.com/v " 2023-07-28 … " 20… " -6…
+     7 02:06:2B:A5:0C:31 Avenue611                        " 2023-07-28 … " 20… " -6…
+     8 02:1D:0F:A4:94:74 iPhone (Дима )                   " 2023-07-28 … " 20… " -6…
+     9 02:32:DC:56:5C:82 Timo Resort                      " 2023-07-28 … " 20… " -8…
+    10 02:35:E9:C2:44:5F iPhone (Максим)                  " 2023-07-28 … " 20… " -8…
+    # ℹ 1,467 more rows
 
 1.  Оценить стабильность уровня сигнала внури кластера во времени.
     Выявить наиболее стабильный кластер.
+
+``` r
+dataset_2 %>% filter(!is.na(Probed.ESSIDs),!is.na(Power) ) %>% group_by(Station.MAC) %>%  summarise("first" = min(First.time.seen), "last" = max(Last.time.seen), Power) %>% arrange(desc(Power)) %>% head(1)
+```
+
+    # A tibble: 1 × 4
+      Station.MAC       first                  last                   Power 
+      <chr>             <chr>                  <chr>                  <chr> 
+    1 8A:45:77:F9:7F:F4 " 2023-07-28 10:00:55" " 2023-07-28 10:00:55" " -89"
 
 ## Вывод
 
