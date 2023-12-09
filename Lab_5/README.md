@@ -36,15 +36,15 @@ library(dplyr)
         intersect, setdiff, setequal, union
 
 ``` r
-dataset <- read.csv("C:/Users/Asus/Downloads/Telegram Desktop/mir.csv-01/mir.csv-01.csv")
+dataset <- read.csv("mir.csv-01.csv")
 ```
 
 ``` r
-dataset_1 <- read.csv(file="C:/Users/Asus/Downloads/Telegram Desktop/mir.csv-01/mir.csv-01.csv",nrows=167)
+dataset_1 <- read.csv(file="mir.csv-01.csv",nrows=167)
 ```
 
 ``` r
-dataset_2 <- read.csv(file="C:/Users/Asus/Downloads/Telegram Desktop/mir.csv-01/mir.csv-01.csv",skip=169)
+dataset_2 <- read.csv(file="mir.csv-01.csv",skip=169)
 ```
 
 1.  Привести датасеты в вид “аккуратных данных”, преобразовать типы
