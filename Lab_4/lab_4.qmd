@@ -22,7 +22,7 @@ engine: knitr
 ```{r}
 library(readr)
 library(dplyr)
-header <- read.csv("C:/Users/Asus/Desktop/Универ/Threat_Hunting/header.csv")
+header <- read.csv("header.csv")
 header
 ```
 

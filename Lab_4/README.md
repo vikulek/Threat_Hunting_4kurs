@@ -37,7 +37,7 @@ library(dplyr)
         intersect, setdiff, setequal, union
 
 ``` r
-header <- read.csv("C:/Users/Asus/Desktop/Универ/Threat_Hunting/header.csv")
+header <- read.csv("header.csv")
 header
 ```
 
@@ -43982,3 +43982,8 @@ unique(t$id.orig_h)%>% head()
 -   api.twitter.com : США, Сан-Франциско, Twitter Inc.
 
 -   api.facebook.com : США, Менло-Парк, Facebook, Inc.
+
+## Вывод
+
+Используя программный пакет dplyr, был освоен анализ DNS логов с помощью
+языка программирования R.
