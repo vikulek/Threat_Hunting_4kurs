@@ -56,7 +56,12 @@ library(tidyr)
     jsonlite::stream_in(file()).
 
 ``` r
-data <- stream_in(file("C:\\Users\\Asus\\Downloads\\dataset.tar\\dataset\\caldera_attack_evals_round1_day1_2019-10-20201108.json"))
+url <- "https://storage.yandexcloud.net/iamcth-data/dataset.tar.gz"
+download.file(url, destfile = tf <- tempfile(fileext = ".tar.gz"), mode = "wb")
+temp_dir <- tempdir()
+untar(tf, exdir = temp_dir)
+json_files <- list.files(temp_dir, pattern="\\.json$", full.names = TRUE, recursive = TRUE)
+data <- stream_in(file(json_files))
 ```
 
     opening file input connection.
