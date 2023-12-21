@@ -27,7 +27,7 @@ header
 ```
 
 ```{r}
-dns <- read.csv("C:/Users/Asus/Desktop/Универ/Threat_Hunting/dns.log",sep ='\t')
+dns <- read.csv("dns.log",sep ='\t')
 dns
 ```
 

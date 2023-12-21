@@ -87,7 +87,7 @@ header
     21                                               Whether the DNS query was rejected by the server 
 
 ``` r
-dns <- read.csv("C:/Users/Asus/Desktop/Универ/Threat_Hunting/dns.log",sep ='\t')
+dns <- read.csv("dns.log",sep ='\t')
 dns
 ```
 
